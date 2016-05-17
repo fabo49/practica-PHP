@@ -47,7 +47,7 @@
 			<div class="row">
 				<div class="col s12 m6">
 					<a class="waves-effect waves-light btn left-align" href="<?php echo $_SERVER['PHP_SELF']; ?>">Agregar un nuevo usuario</a>
-          <span class="hide-on-med-and-up"><br/></span>
+          <br/>
 				</div>
 				<div class="col s12 m6">
 					<a class="waves-effect waves-light btn right-align" href="<?php echo $_SERVER['PHP_SELF']; ?>?action=ver">Ver todos los usuarios</a>
