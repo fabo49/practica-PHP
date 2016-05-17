@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Registro de usuarios, bienvenido</title>
 	<!-- Status bar en chrome para android -->
-  <meta name="theme-color" content="#795548">
+	<meta name="theme-color" content="#795548">
 
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -19,10 +19,6 @@
 	<!-- Compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 	<style>
-	th{
-		text-align:center;
-	}
-
 	body {
 		display: flex;
 		min-height: 100vh;
@@ -39,54 +35,21 @@
 		<div class="container">
 			<div class="row">
 				<div class="col s12">
-					<h1>Registro de usuarios</h1>
-					<p class="flow-text">Direcciones personales</p>
-					<a href="<?php echo $_SERVER['PHP_SELF']; ?>">Agregar un nuevo usuario</a>
+					<h1>Edición de usuario</h1>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col s12">
-					<table class="striped responsive-table">
-						<thead>
-							<tr>
-								<th>Nombre</th>
-								<th>Apellidos</th>
-								<th>Telefono de la casa</th>
-								<th>Direccion de la casa</th>
-								<th>Telefono del trabajo</th>
-								<th>Direccion del trabajo</th>
-								<th>Correo electronico</th>
-								<th colspan=2>Acciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-							foreach ($visitas as $visita)
-							{
-								?>
-								<tr>
-									<td><?php echo $visita['nombre']; ?></td>
-									<td><?php echo $visita['apellidos']; ?></td>
-									<td><?php echo $visita['tel_casa']; ?></td>
-									<td><?php echo $visita['direccion_casa']; ?></td>
-									<td><?php echo $visita['tel_trabajo']; ?></td>
-									<td><?php echo $visita['direccion_trabajo']; ?></td>
-									<td><?php echo $visita['correo']; ?></td>
-
-									<!-- TODO: hay que pasarle le identificador al mofo -->
-									<td><a href="<?php echo $_SERVER['PHP_SELF']; ?>?action=edit&id=<?php echo $visita['id'];?>">Editar</a></td>
-									<td><a href="<?php echo $_SERVER['PHP_SELF']; ?>?action=delete&id=<?php echo $visita['id'];?>">Borrar</a></td>
-								</tr>
-								<?php
-							}
-							?>
-						</tbody>
-					</table>
+					<p class="flow-text"><?php echo $mensaje; ?></p>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col s12">
-					<a href="<?php echo $_SERVER['PHP_SELF']; ?>">Agregar un nuevo usuario</a>
+				<div class="col s12 m6">
+					<a class="waves-effect waves-light btn left-align" href="<?php echo $_SERVER['PHP_SELF']; ?>">Agregar un nuevo usuario</a>
+					<br/>
+				</div>
+				<div class="col s12 m6">
+					<a class="waves-effect waves-light btn right-align" href="<?php echo $_SERVER['PHP_SELF']; ?>?action=ver">Ver todos los usuarios</a>
 				</div>
 			</div>
 		</div>

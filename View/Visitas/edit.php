@@ -36,23 +36,52 @@
     <div class="container">
       <div class="row">
         <div class="col s12">
-  					<h1>Edición de usuario</h1>
+          <h1>Edicion de usuarios</h1>
+          <p class="flow-text">Este formulario le permite editar direcciones de contactos en el sistema.</p>
         </div>
       </div>
-			<div class="row">
-				<div class="col s12">
-					<p class="flow-text"><?php echo $mensaje; ?></p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col s12 m6">
-					<a class="waves-effect waves-light btn left-align" href="<?php echo $_SERVER['PHP_SELF']; ?>">Agregar un nuevo usuario</a>
-          <br/>
-				</div>
-				<div class="col s12 m6">
-					<a class="waves-effect waves-light btn right-align" href="<?php echo $_SERVER['PHP_SELF']; ?>?action=ver">Ver todos los usuarios</a>
-				</div>
-			</div>
+      <div class="row">
+        <form name="visita" id="visita" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="col s12 ">
+          <input name="action" type="hidden" value="salvar" />
+          <input name="id" type="hidden" value="<?php echo $vec_data['id']; ?>"/>
+          <div class="input-field col s6">
+            <input type="text" class="validate" name="nombre" id="nombre" maxlength="50" value="<?php echo $vec_data['nombre']; ?>">
+            <label for="nombre">Nombre</label>
+          </div>
+          <div class="input-field col s6">
+            <input type="text" class="validate" name="apellidos" id="apellidos" maxlength="50" value="<?php echo $vec_data['apellidos']; ?>">
+            <label for="apellidos">Apellidos</label>
+          </div>
+          <div class="input-field col s12">
+            <input type="tel" class="validate" name="tel_casa" id="tel_casa" maxlength="15" value="<?php echo $vec_data['tel_casa']; ?>">
+            <label for="tel_casa">Teléfono de la casa</label>
+          </div>
+          <div class="input-field col s12">
+            <textarea type="text" cols="50" rows="2" class="materialize-textarea validate" name="direccion_casa" id="direccion_casa" length="256"><?php echo $vec_data['direccion_casa']; ?></textarea>
+            <label for="direccion_casa">Dirección de la casa</label>
+          </div>
+          <div class="input-field col s12">
+            <input type="tel" class="validate" name="tel_trabajo" id="tel_trabajo" maxlength="15" value="<?php echo $vec_data['tel_trabajo']; ?>">
+            <label for="tel_trabajo">Teléfono del trabajo</label>
+          </div>
+          <div class="input-field col s12">
+            <textarea type="text" cols="50" rows="2" class="materialize-textarea validate" name="direccion_trabajo" id="direccion_trabajo" length="256"><?php echo $vec_data['direccion_trabajo']; ?></textarea>
+            <label for="direccion_trabajo">Dirección del trabajo</label>
+          </div>
+          <div class="input-field col s12">
+            <input name="correo" type="email" id="correo" class="validate" value="<?php echo $vec_data['correo']; ?>">
+            <label for="correo" data-error="Tiene que ser un correo electrónico válido." data-success="right">Correo electrónico</label>
+          </div>
+          <div class="input-field col s12">
+            <button class="btn-floating btn-large waves-effect waves-light right" type="submit" name="Enviar" id="Enviar"><i class="material-icons">send</i></button>
+          </div>
+        </form>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <a href="<?php echo $_SERVER['PHP_SELF']; ?>?action=ver">Ver todos los usuarios registrados.</a>
+        </div>
+      </div>
     </div>
   </main>
   <footer class="page-footer brown">

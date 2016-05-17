@@ -56,17 +56,55 @@ function liste() {
 	fclose($file);
 	return $visitas;
 }
+function salvar($post){
+	// TODO
+	//return 'Falta implementar esta función!!';
+
+	if(check_parameters($post) == 0){
+		delete($post['id']);
+		$file = fopen('direcciones.csv', 'a+');
+		$data = array(
+			$post['id'],
+			strip_tags($post['nombre']),
+			strip_tags($post['apellidos']),
+			strip_tags($post['tel_casa']),
+			strip_tags(str_replace("\r\n", '', nl2br($post['direccion_casa']))),
+			strip_tags($post['tel_trabajo']),
+			strip_tags(str_replace("\r\n", '', nl2br($post['direccion_trabajo']))),
+			strip_tags($post['correo'])
+		);
+		if (fputcsv($file,  $data) > 0)
+		{
+			fclose($file);
+			return 'Sus datos han sido actualizado satisfactoriamente.';
+		}
+		else
+		{
+			fclose($file);
+			return 'Sus datos no se actualizaron, vuelva a intentarlo.';
+		}
+	}else{
+		return 'Sus datos no se actualizaron ya que envió campos vacíos, revise el formulario y vuelva a intentarlo';
+	}
+}
 
 function edit($id){
 	// TODO
-	return 'Falta implementar esta función!!';
+	//return 'Falta implementar esta función!!';
+	$file = fopen('direcciones.csv', 'r');
+	while(!feof($file)){
+		$vec_line = fgetcsv($file);
+		if(strcmp($vec_line[0], $id) == 0){
+			// Se convierte el indexed array a un fields array
+			$vec_data = array('id'=>$vec_line[0], 'nombre'=>$vec_line[1], 'apellidos' => $vec_line[2], 'tel_casa' => $vec_line[3], 'direccion_casa' => $vec_line[4], 'tel_trabajo' => $vec_line[5], 'direccion_trabajo' => $vec_line[6], 'correo' => $vec_line[7]);
+			fclose($file);
+			return $vec_data;
+		}
+	}
 }
 
 function delete($id){
 
-	//return 'Falta implementar esta función!!';
-
-	// TODO
 	$file = fopen('direcciones.csv', 'r');
 	$vec_data = array();
 
@@ -106,17 +144,20 @@ class VisitasController extends Solsoft\ekeke\Controller {
 	{
 	}
 
+	function salvar(){
+		// TODO
+		$this->view->assign('mensaje', salvar($_POST));
+	}
 	function edit()
 	{
 		// TODO
 		if(isset($_GET['id'])){
-			$this->view->assign('mensaje', edit($_GET['id']));
+			$this->view->assign('vec_data', edit($_GET['id']));
 		}
 	}
 
 	function delete()
 	{
-		// TODO
 		if(isset($_GET['id'])){
 			$this->view->assign('mensaje', delete($_GET['id']));
 		}
