@@ -15,6 +15,7 @@ function grabe($post)
 	if(check_parameters($post) == 0){
 		$file = fopen('direcciones.csv', 'a+');
 		$id = date("Y.m.d")."-". date("h:i:sa");
+		// strip_tags evita ataques XSS ya que elimina los tags de HTML.
 		$data = array(
 			$id,
 			strip_tags($post['nombre']),
@@ -57,12 +58,11 @@ function liste() {
 	return $visitas;
 }
 function salvar($post){
-	// TODO
-	//return 'Falta implementar esta función!!';
 
 	if(check_parameters($post) == 0){
 		delete($post['id']);
 		$file = fopen('direcciones.csv', 'a+');
+		// strip_tags evita ataques XSS ya que elimina los tags de HTML.
 		$data = array(
 			$post['id'],
 			strip_tags($post['nombre']),
@@ -89,8 +89,6 @@ function salvar($post){
 }
 
 function edit($id){
-	// TODO
-	//return 'Falta implementar esta función!!';
 	$file = fopen('direcciones.csv', 'r');
 	while(!feof($file)){
 		$vec_line = fgetcsv($file);
@@ -145,12 +143,10 @@ class VisitasController extends Solsoft\ekeke\Controller {
 	}
 
 	function salvar(){
-		// TODO
 		$this->view->assign('mensaje', salvar($_POST));
 	}
 	function edit()
 	{
-		// TODO
 		if(isset($_GET['id'])){
 			$this->view->assign('vec_data', edit($_GET['id']));
 		}
